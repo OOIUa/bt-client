@@ -260,10 +260,10 @@ onUnmounted(() => {
 .download-end
 	position: relative
 	cursor: pointer
-	z-index:1
+	z-index: 1
 	&:hover::before
 		content: ''
-		background-color: #a8c7fa
+		background-color: var(--el-fill-color-light)
 		position: absolute
 		width: 3rem
 		height: 3rem
@@ -271,9 +271,5 @@ onUnmounted(() => {
 		left: -7px
 		top: -6px
 		border-radius: 20px
-		z-index:-1
-.dark
-	.download-end
-		&:hover::before
-			background-color: #1f1f1f
+		z-index: -1
 </style>

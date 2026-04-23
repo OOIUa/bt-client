@@ -2,32 +2,22 @@
 	<div class="flex items-center">
 		<ul class="flex m-0">
 			<li :class="{ active: $route.path === '/setting' }" @click="goTo('/setting')">
-				<div class="bg-color"></div>
 				<div class="flex bg-text">
-					<bt-icon name="user" color="1f1f1f" size="16" class="z-1" />
+					<bt-icon name="user" :color="$route.path === '/setting' ? 'var(--el-color-primary)' : 'var(--el-text-color-regular)'" size="16" class="z-1" />
 				</div>
 			</li>
 			<li :class="{ active: $route.path === '/home' }" @click="goTo('/home')">
-				<div class="bg-color"></div>
 				<div class="flex bg-text">
-					<bt-icon name="panel" color="1f1f1f" size="16" class="z-1" />
+					<bt-icon name="panel" :color="$route.path === '/home' ? 'var(--el-color-primary)' : 'var(--el-text-color-regular)'" size="16" class="z-1" />
 					<span class="title">{{ pub.lang('面板') }}</span>
 				</div>
 			</li>
 			<li :class="{ active: $route.path === '/xterm' }" @click="goTo('/xterm')">
-				<div class="bg-color"></div>
 				<div class="flex bg-text">
-					<bt-icon name="xterm" color="1f1f1f" size="16" class="z-1" />
+					<bt-icon name="xterm" :color="$route.path === '/xterm' ? 'var(--el-color-primary)' : 'var(--el-text-color-regular)'" size="16" class="z-1" />
 					<span class="title">{{ pub.lang('终端') }}</span>
 				</div>
 			</li>
-			<!-- <li :class="{ active: $route.path === '/batchSender' }" @click="goTo('/batchSender')">
-				<div class="bg-color"></div>
-				<div class="flex bg-text">
-					<bt-icon name="bulk" color="1f1f1f" size="16" class="z-1" />
-					<span class="title">{{ pub.lang('群发') }}</span>
-				</div>
-			</li> -->
 		</ul>
 		<el-divider direction="vertical" class="menu-line"></el-divider>
 	</div>
@@ -47,85 +37,57 @@ const goTo = (path: string) => {
 <style scoped lang="scss">
 ul {
 	padding: 0;
-	padding-top: 7px;
 	height: 100%;
-	color: #1f1f1f;
+	color: var(--el-text-color-primary);
+	display: flex;
+	align-items: center;
+	margin-left: 0.5rem;
 	li {
 		display: flex;
 		align-items: center;
-		height: 3.4rem;
-		padding: 0.5rem 1rem;
-		border-radius: 1rem;
+		height: 2.8rem;
+		padding: 0 1rem;
+		border-radius: 6px;
 		margin-right: 0.5rem;
 		position: relative;
 		cursor: pointer;
+		transition: all 0.2s ease;
+		
 		.bg-text {
 			z-index: 1;
-			margin-top: -4px;
+			display: flex;
+			align-items: center;
 			.title {
-				font-size: 1.2rem;
-				margin-left: 0.5rem;
+				font-size: 1.3rem;
+				font-weight: 500;
+				margin-left: 0.6rem;
 			}
 		}
+		
 		&:hover {
-			.bg-color {
-				background-color: #a8c7fa;
-				height: 2.8rem;
-				border-radius: 1rem;
-				box-shadow: none;
-				width: 100%;
-				position: absolute;
-				top: 0;
-				left: 0;
-			}
-			&:first-child {
-				.bg-color {
-					width: 3.6rem;
-				}
-			}
+			background-color: var(--el-fill-color-light);
 		}
+		
 		&.active {
-			.bg-color {
-				position: absolute;
-				background-color: #fff;
-				border-radius: 5px;
-				width: 100%;
-				height: 3.5rem;
-				left: 0;
-				&::before,
-				&::after {
-					position: absolute;
-					bottom: 0;
-					content: '';
-					width: 21px;
-					height: 20px;
-					border-radius: 50%;
-					box-shadow: 0 0 0 40px #fff; /*使用box-shadow不影响尺寸*/
-				}
-				&::before {
-					left: -19px;
-					clip-path: inset(50% -10px 0 50%);
-				}
-				&::after {
-					right: -19px;
-					clip-path: inset(50% 50% 0 -10px);
-				}
+			background-color: var(--el-color-primary-light-9);
+			color: var(--el-color-primary);
+			font-weight: 600;
+			
+			:deep(svg) {
+				fill: var(--el-color-primary) !important;
+				path { fill: var(--el-color-primary) !important; }
 			}
 		}
-		&:first-child {
-			&.active {
-				.bg-color {
-					width: 3.6rem;
-				}
-			}
-		}
+		
 		&:last-child {
 			margin-right: 0;
 		}
 	}
 }
 .menu-line {
-	border-width: 0.2rem;
-	border-color: #b8c0cd;
+	border-width: 1px;
+	border-color: var(--el-border-color);
+	height: 2rem;
+	margin: 0 1rem;
 }
 </style>

@@ -580,15 +580,15 @@ export default defineComponent({
 
 <style lang="scss">
 .vue3-tabs-chrome {
-	$bg: #d3e3fd;
+	$bg: transparent;
 	$gap: 7px;
-	$divider: #a9adb0;
+	$divider: var(--el-border-color-light);
 	$speed: 150ms;
 
 	padding-top: 0.55rem;
 	background-color: $bg;
 	position: relative;
-	color: #1f1f1f;
+	color: var(--el-text-color-primary);
 
 	.tabs-content {
 		height: 3.5rem;
@@ -624,12 +624,12 @@ export default defineComponent({
 			}
 
 			.tabs-background-content {
-				background-color: #f2f3f5;
+				background-color: var(--el-fill-color-light);
 			}
 
 			.tabs-background-before,
 			.tabs-background-after {
-				fill: #f2f3f5;
+				fill: var(--el-fill-color-light);
 			}
 		}
 
@@ -641,7 +641,7 @@ export default defineComponent({
 			z-index: 3;
 
 			.tabs-background-content {
-				background-color: #f2f3f5;
+				background-color: var(--el-fill-color-light);
 			}
 
 			.tabs-background-divider {
@@ -650,7 +650,7 @@ export default defineComponent({
 
 			.tabs-background-before,
 			.tabs-background-after {
-				fill: #f2f3f5;
+				fill: var(--el-fill-color-light);
 			}
 		}
 
@@ -658,7 +658,7 @@ export default defineComponent({
 			z-index: 2;
 			min-width:66px;
 			.tabs-refresh,.tabs-close {
-				background-color: #fff;
+				background-color: var(--el-bg-color-page);
 			}
 			.tabs-background{
 				z-index: 1;
@@ -671,6 +671,8 @@ export default defineComponent({
 					}
 					.tabs-label{
 						margin-right: 40px;
+						font-weight: 600;
+						color: var(--el-color-primary);
 					}
 			}
 
@@ -679,12 +681,12 @@ export default defineComponent({
 			}
 
 			.tabs-background-content {
-				background-color: #fff;
+				background-color: var(--el-bg-color-page);
 			}
 
 			.tabs-background-before,
 			.tabs-background-after {
-				fill: #fff;
+				fill: var(--el-bg-color-page);
 			}
 		}
 
@@ -698,7 +700,7 @@ export default defineComponent({
 				display: none;
 			}
 			.tabs-main {
-				background-color: #a8c7fa;
+				background-color: var(--el-fill-color-dark);
 			}
 		}
 	}

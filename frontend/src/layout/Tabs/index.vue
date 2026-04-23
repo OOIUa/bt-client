@@ -18,6 +18,7 @@ import operation from './operation.vue'
 <style scoped lang="scss">
 .layout-header {
 	position: relative;
-	background-color: #d3e3fd;
+	background-color: var(--el-bg-color);
+	z-index: 10;
 }
 </style>

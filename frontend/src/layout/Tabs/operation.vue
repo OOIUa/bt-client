@@ -103,14 +103,15 @@ const setCloseConfig = () => {
 	cursor: pointer;
 	border: none;
 	background: none;
+	transition: background-color 0.2s ease;
 }
 
 .control:hover {
-	background-color: #a8c7fa;
+	background-color: var(--el-fill-color-light);
 }
 .control.maximize {
 	span {
-		border: 1px solid #000;
+		border: 1px solid var(--el-text-color-primary);
 		width: 10px;
 		height: 10px;
 	}
@@ -120,7 +121,7 @@ const setCloseConfig = () => {
 		display: block;
 		width: 8px;
 		height: 8px;
-		border: 1px solid #000;
+		border: 1px solid var(--el-text-color-primary);
 		position: relative;
 		top: -1px;
 	}
@@ -131,10 +132,10 @@ const setCloseConfig = () => {
 		left: -3px;
 		width: 6px;
 		height: 6px;
-		border: 1px solid #000;
-		background-color: #d3e3fd;
+		border: 1px solid var(--el-text-color-primary);
+		background-color: var(--el-bg-color);
 		&:hover {
-			background-color: #a8c7fa;
+			background-color: var(--el-fill-color-light);
 		}
 	}
 }
@@ -142,7 +143,7 @@ const setCloseConfig = () => {
 	span {
 		width: 1rem;
 		height: 0.1rem;
-		background-color: #000;
+		background-color: var(--el-text-color-primary);
 	}
 }
 .control.close {
@@ -160,7 +161,7 @@ const setCloseConfig = () => {
 			height: 100%;
 			margin-left: (1px / -2);
 			content: '';
-			background-color: #000;
+			background-color: var(--el-text-color-primary);
 		}
 		&::before {
 			transform: rotate(-45deg);

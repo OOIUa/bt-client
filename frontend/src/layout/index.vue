@@ -42,7 +42,7 @@ onMounted(() => {
 	min-height: 100vh;
 	max-height: 100vh;
 	flex-direction: column;
-	background-color: var(--el-bg-color);
+	background-color: var(--el-bg-color-page);
 	// 	z-index: 0;
 	.layout-right-main {
 		flex: 1;

@@ -124,54 +124,54 @@
 								<template v-if="!item.panelInfo.isError">
 									<div class="card-content">
 										<div class="rows">
-											<span class="label">{{ pub.lang('负载') }}：</span>
+											<span class="label">{{ pub.lang('负载') }}</span>
 											<span class="value">{{ createLoadInfo(item.panelInfo.load) }}</span>
 										</div>
 										<div class="rows">
-											<span class="label">{{ pub.lang('网络') }}：</span>
-											<span class="value">
-												<span class="mr-4">
-													<el-icon color="#F7B851" :size="14"><Top /></el-icon>
+											<span class="label">{{ pub.lang('网络') }}</span>
+											<span class="value flex items-center">
+												<span class="mr-4 flex items-center">
+													<el-icon color="var(--el-color-warning)" :size="14" class="mr-1"><Top /></el-icon>
 													{{ getByteUnit(item.panelInfo.up) }}
 												</span>
-												<span>
-													<el-icon color="#52A9FF" :size="14"><Bottom /></el-icon>
+												<span class="flex items-center">
+													<el-icon color="var(--el-color-primary)" :size="14" class="mr-1"><Bottom /></el-icon>
 													{{ getByteUnit(item.panelInfo.down) }}
 												</span>
 											</span>
 										</div>
-										<div class="rows">
-											<span class="label">CPU：</span>
-											<span class="value"
-												>{{ pub.lang('{}核', item.panelInfo.cpu[1]) }} ({{
-													item.panelInfo.cpu[0]
-												}}%)</span
-											>
+										<div class="rows flex-col items-stretch">
+											<div class="flex justify-between w-full mb-1">
+												<span class="label">CPU</span>
+												<span class="value">{{ pub.lang('{}核', item.panelInfo.cpu[1]) }} ({{ item.panelInfo.cpu[0] }}%)</span>
+											</div>
 											<el-progress
 												:percentage="Number(item.panelInfo.cpu[0])"
 												:show-text="false"
+												:stroke-width="6"
 												status="success" />
 										</div>
-										<div class="rows">
-											<span class="label">{{ pub.lang('内存') }}：</span>
-											<span class="value"
-												>{{ item.panelInfo.mem.memRealUsed }} / {{ item.panelInfo.mem.memTotal }}MB
-												({{ createMemoryInfo(item.panelInfo.mem) }}%)</span
-											>
+										<div class="rows flex-col items-stretch">
+											<div class="flex justify-between w-full mb-1">
+												<span class="label">{{ pub.lang('内存') }}</span>
+												<span class="value">{{ item.panelInfo.mem.memRealUsed }} / {{ item.panelInfo.mem.memTotal }}MB ({{ createMemoryInfo(item.panelInfo.mem) }}%)</span>
+											</div>
 											<el-progress
 												:percentage="createMemoryInfo(item.panelInfo.mem)"
 												:show-text="false"
+												:stroke-width="6"
 												status="success" />
 										</div>
 									</div>
-									<div class="rows">
-										<span class="label">
-											<div class="flex">
-												<span>{{ pub.lang('磁盘') }}：</span>
+									<div class="rows flex-col items-stretch mt-1">
+										<div class="flex justify-between w-full mb-1">
+											<span class="label flex items-center">
+												<span class="mr-2">{{ pub.lang('磁盘') }}</span>
 												<el-select
 													v-model="item.current_disk"
 													size="small"
-													class="flex-1 disk-card-select"
+													class="disk-card-select"
+													style="width: 120px;"
 													@click.native.stop
 													@change="onChangeDiskPath($event, item)"
 													placeholder=" ">
@@ -182,14 +182,14 @@
 														:value="items.path"
 														class="disk-card-option" />
 												</el-select>
-											</div>
-										</span>
-										<span class="value">
-											<el-progress
-												:percentage="diskProgress(item, item.current_disk)"
-												:show-text="false"
-												status="success" />
-										</span>
+											</span>
+											<span class="value">{{ diskProgress(item, item.current_disk) }}%</span>
+										</div>
+										<el-progress
+											:percentage="diskProgress(item, item.current_disk)"
+											:show-text="false"
+											:stroke-width="6"
+											status="success" />
 									</div>
 								</template>
 								<template v-else>
@@ -273,10 +273,10 @@ const firstLoad = ref(true)
 const allPanelList = ref([]) as any
 
 const authType = [
-	{ name: pub.lang('免费版'), bg: 'bg-[#e7e7e7]', text: 'text-[#909399]' },
-	{ name: pub.lang('专业版'), bg: 'bg-[#fbe239]', text: 'text-[#b68115]' },
-	{ name: pub.lang('企业版'), bg: 'bg-[#474745]', text: 'text-[#d1ad68]' },
-	{ name: pub.lang('获取中'), bg: 'bg-[#e7e7e7]', text: 'text-[#909399]' },
+	{ name: pub.lang('免费版'), bg: 'bg-gray-100', text: 'text-gray-600' },
+	{ name: pub.lang('专业版'), bg: 'bg-blue-50', text: 'text-blue-600' },
+	{ name: pub.lang('企业版'), bg: 'bg-indigo-50', text: 'text-indigo-600' },
+	{ name: pub.lang('获取中'), bg: 'bg-gray-100', text: 'text-gray-500' },
 ]
 const diskTitle = computed(() => (item: any) => {
 	return `[${item.path}] ${item.size[1]} / ${item.size[0]} (${item.size[3]})`
@@ -578,65 +578,90 @@ onUnmounted(() => {
 <style lang="scss" scoped>
 :deep(.el-card) {
 	cursor: pointer;
-	border-radius: 10px;
+	border-radius: 12px;
+	border: 1px solid var(--el-border-color-light);
+	box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+	transition: all 0.2s ease;
+	
+	&:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+	}
+
 	.el-card__header {
-		background-color: #fcfcfd;
-		// font-weight: 500;
-		color: #000;
-		border-top-left-radius: 10px;
-		border-top-right-radius: 10px;
+		background-color: var(--el-fill-color-light);
+		color: var(--el-text-color-primary);
+		border-bottom: 1px solid var(--el-border-color-lighter);
+		padding: 0;
 	}
 	.el-card__body {
-		padding: 0.5rem 1.2rem 1.2rem;
+		padding: 1.2rem 1.5rem;
 		.rows {
 			line-height: 2;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			margin-bottom: 0.4rem;
+			
+			.label {
+				color: var(--el-text-color-regular);
+				font-size: 0.9rem;
+			}
+			.value {
+				color: var(--el-text-color-primary);
+				font-size: 0.95rem;
+				font-weight: 500;
+			}
 		}
 	}
 }
+
 :deep(.el-progress.is-success) {
 	.el-progress-bar__inner {
-		background-color: #20a53a !important;
+		background-color: var(--el-color-success) !important;
 	}
 }
+
 .welcome {
 	text-align: center;
-	color: #bdbdbd;
+	color: var(--el-text-color-placeholder);
 }
+
 .panel-search {
-	background-color: #f2f2f2;
+	background-color: var(--el-fill-color-light);
 	border-radius: 8px;
 	display: flex;
 	align-items: center;
 	padding-left: 1rem;
+	border: 1px solid transparent;
+	transition: all 0.2s ease;
+	
 	:deep(.el-input) {
-		width: 31.8rem;
-		height: 4.4rem;
+		width: 24rem;
+		height: 3rem;
 		.el-input__wrapper {
-			background-color: #f2f2f2;
+			background-color: transparent;
 			padding-left: 0;
 			padding-right: 0;
-			box-shadow: 0 0 0 0px var(--el-input-border-color, var(--el-border-color)) inset;
+			box-shadow: none;
 			input {
-				font-size: 1.6rem;
+				font-size: 1rem;
+				color: var(--el-text-color-primary);
 				&::placeholder {
-					color: #000;
-					font-weight: 500;
+					color: var(--el-text-color-placeholder);
+					font-weight: 400;
 				}
 			}
 		}
 	}
+	
 	&--active {
-		background-color: white;
-		box-shadow:
-			rgba(65, 69, 73, 0.3) 0 1px 1px 0,
-			rgba(65, 69, 73, 0.15) 0 1px 3px 1px;
-		:deep(.el-input) {
-			.el-input__wrapper {
-				background-color: white;
-			}
-		}
+		background-color: var(--el-bg-color);
+		border-color: var(--el-color-primary);
+		box-shadow: 0 0 0 2px var(--el-color-primary-light-8);
 	}
 }
+
 .panel__content {
 	.el-scrollbar {
 		:deep(.el-scrollbar__wrap) {
@@ -647,48 +672,55 @@ onUnmounted(() => {
 		padding: 5px;
 	}
 }
+
 .card-panel-item {
-	box-shadow: rgba(0, 0, 0, 0.08) 0px 2px 12px;
-	// transition: all 0.3s ease;
-	// &:hover {
-	// 	transform: translateY(-5px);
-	// 	box-shadow: rgba(0, 0, 0, 0.12) 0px 8px 24px;
-	// }
 	&.isNoOpen {
 		opacity: 0.5;
 	}
 	&.isError {
-		background: #fcf1ef;
+		background: var(--el-color-danger-light-9);
+		border-color: var(--el-color-danger-light-7);
 		cursor: not-allowed !important;
-		box-shadow:
-			rgba(252, 241, 239, 0.3) 0 1px 2px 0,
-			rgba(252, 241, 239, 0.15) 0 2px 6px 2px;
+		box-shadow: none;
+		
 		:deep(.el-card__header) {
-			background-color: #fcf1ef;
+			background-color: var(--el-color-danger-light-9);
+			border-bottom-color: var(--el-color-danger-light-8);
 		}
 		:deep(.el-progress-bar__outer) {
-			background-color: #fde8e8;
+			background-color: var(--el-color-danger-light-8);
+		}
+		&:hover {
+			transform: none;
 		}
 	}
 	:deep(.disk-card-select) {
 		.el-select__wrapper {
 			padding: 0;
-			height: 1rem;
-			font-size: 1.2rem;
+			height: 1.2rem;
+			font-size: 0.9rem;
 			box-shadow: none;
+			background-color: transparent;
 			.el-input__inner {
 				padding: 0;
 			}
 		}
 	}
-	.card-btn-style{
-		font-size: 1.6rem;
+	.card-btn-style {
+		font-size: 1.2rem;
+		border: none;
+		background: transparent;
+		&:hover {
+			color: var(--el-color-primary-dark-2);
+			background-color: var(--el-fill-color);
+		}
 	}
 }
+
 .disk-card-option {
-	height: 2rem;
-	line-height: 2rem;
-	font-size: 1.2rem;
-	padding: 0 10px 0 10px;
+	height: 2.2rem;
+	line-height: 2.2rem;
+	font-size: 0.9rem;
+	padding: 0 10px;
 }
 </style>
