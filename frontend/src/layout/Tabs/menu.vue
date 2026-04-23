@@ -12,12 +12,6 @@
 					<span class="title">{{ pub.lang('面板') }}</span>
 				</div>
 			</li>
-			<li :class="{ active: $route.path === '/xterm' }" @click="goTo('/xterm')">
-				<div class="flex bg-text">
-					<bt-icon name="xterm" :color="$route.path === '/xterm' ? 'var(--el-color-primary)' : 'var(--el-text-color-regular)'" size="16" class="z-1" />
-					<span class="title">{{ pub.lang('终端') }}</span>
-				</div>
-			</li>
 		</ul>
 		<el-divider direction="vertical" class="menu-line"></el-divider>
 	</div>
